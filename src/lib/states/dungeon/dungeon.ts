@@ -15,7 +15,7 @@ abstract class DungeonState extends State {
         this.createBackground();
         this.cursor = this.input.keyboard.createCursorKeys();
         this.protagonist.create();
-        this.protagonist.draw(this.protagonistStartPosition.x, this.protagonistStartPosition.y);
+        this.protagonist.sprite.position.setTo(this.protagonistStartPosition.x, this.protagonistStartPosition.y);
     }
 
     createBackground(): void {

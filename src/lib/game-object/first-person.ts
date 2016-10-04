@@ -18,12 +18,15 @@ abstract class FirstPerson extends Character {
 
     create(): void {
         super.create();
+
         this._spacebar = this.game.input.keyboard.addKey(KeyCode.SPACEBAR);
         this._spacebar.onDown.add(() => {
             this.jump();
         });
 
         this.keys = this.game.input.keyboard.createCursorKeys();
+
+        this.draw(0, 0);
     }
 
     touchingScreen(): boolean {
@@ -49,7 +52,7 @@ abstract class FirstPerson extends Character {
             } else if (this.keys.right.isDown) {
                 this.right();
             }
-        } else {
+        } else if(this.body !== undefined && this.sprite != null) {
             this.idle();
         }
     }
