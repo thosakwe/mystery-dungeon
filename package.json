@@ -1,42 +1,50 @@
 {
-  "name": "phaser-ts-boilerplate",
+  "name": "mystery-dungeon",
   "version": "1.0.0-dev",
-  "description": "Instant Phaser games with TypeScript, WebPack and ES6.",
-  "private": "true",
-  "main": "src/main.ts",
+  "description": "Shameless attempt at remaking some features of Red Rescue Team",
+  "private": true,
+  "main": "main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "build-dev": "webpack",
     "dev": "webpack-dev-server --port=3000",
     "publish": "npm run build && npm run push",
     "push": "git add . && git commit -m \"Game update\" && git push origin gh-pages",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --colors --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thosakwe/phaser-ts-boilerplate.git"
+    "url": "git+https://github.com/thosakwe/mystery-dungeon.git"
   },
   "author": "Tobe O <thosakwe@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thosakwe/phaser-ts-boilerplate/issues"
+    "url": "https://github.com/thosakwe/mystery-dungeon/issues"
   },
-  "homepage": "https://github.com/thosakwe/phaser-ts-boilerplate#readme",
+  "homepage": "https://github.com/thosakwe/mystery-dungeon#readme",
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
+    "electron-prebuilt": "^1.4.2",
     "json-loader": "^0.5.4",
     "script-loader": "^0.7.0",
     "ts-loader": "^0.8.2",
     "typescript": "^2.0.3",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1",
-    "webpack-error-notification": "^0.1.6"
+    "webpack-error-notification": "^0.1.6",
+    "webpack-target-electron-renderer": "^0.4.0"
   },
   "dependencies": {
+    "babel-register": "^6.16.3",
+    "express": "^4.14.0",
     "phaser-shim": "^2.4.8",
-    "pixi.js": "^4.0.3"
+    "pixi.js": "^4.0.3",
+    "webpack-dev-middleware": "^1.8.3",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }

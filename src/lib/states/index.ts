@@ -1,6 +1,6 @@
 import Names from './names';
-import Loading from './loading';
-import Title from './title';
+import Loading from './loading/index';
+import Title from './title/index';
 
 export const States = Names;
 export const LoadingState = Loading;

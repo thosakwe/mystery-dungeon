@@ -1,14 +1,24 @@
-import Assets from '../../assets';
 import {Sprite, State} from 'phaser-shim';
 
 export default class Title extends State {
-    logo: Sprite;
+    intro: Sprite;
 
     create(): void {
-        window.document.title = 'My Game';
+        this.intro = this.game.add.sprite(this.game.width / 2, this.game.height / 2, 'intro');
+        this.intro.anchor.setTo(0.5, 0.7);
 
-        this.logo = this.game.add.sprite(this.game.width / 2, this.game.height / 2, Assets.LOGO);
-        this.logo.anchor.setTo(0.5, 0.5);
-        this.logo.scale.setTo(0.5, 0.5);
+        const text = this.add.text(0, this.intro.bottom + 20, 'PRESS ENTER TO BEGIN', {
+            boundsAlignH: 'center',
+            boundsAlignV: 'middle',
+            fill: '#e01058',
+            font: '24px Arial'
+        });
+
+        text.anchor.y = 0.5;
+        text.setTextBounds(0, 0, this.world.width, text.height);
+    }
+
+    preload(): void {
+        this.load.image('intro', '/assets/title/intro.png');
     }
 }
