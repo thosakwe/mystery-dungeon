@@ -3,61 +3,63 @@ import FirstPerson from "./first-person";
 import {Physics, Sprite} from 'phaser-shim';
 
 export default class Protagonist extends FirstPerson {
+    constructor(game) {
+        super(game);
+        this.speed.setTo(200);
+    }
+
     createSprite(): Sprite {
-        const sprite = this.game.add.sprite(0, 0, 'torchic.walk');
-        sprite.animations.add('up', [9, 10, 11], this.animationSpeed);
-        sprite.animations.add('down', [0, 1, 2], this.animationSpeed);
-        sprite.animations.add('left', [3, 4, 5], this.animationSpeed);
-        sprite.animations.add('right', [6, 7, 8], this.animationSpeed);
-        sprite.animations.add('idle.up', [10]);
-        sprite.animations.add('idle.down', [1]);
-        sprite.animations.add('idle.left', [4]);
-        sprite.animations.add('idle.right', [7]);
-        sprite.play('down');
+        const sprite = this.game.add.sprite(0, 0, this.assets.PROTAGONIST);
+
+        sprite.anchor.set(0.5);
+
+        sprite.animations.add('left', [3, 4, 5]);
+        sprite.animations.add('right', [6, 7, 8]);
+        sprite.animations.add('up', [9, 10, 11]);
+        sprite.animations.add('down', [0, 1, 2]);
+        sprite.animations.add('idle front', [1]);
+        sprite.animations.add('idle back', [10]);
+        sprite.animations.add('idle left', [4]);
+        sprite.animations.add('idle right', [7]);
+        sprite.play('idle front', this.animationSpeed);
+
         return sprite;
     }
 
     down(): void {
-        super.down();
-        this.sprite.play('down');
+        this.facing = Facing.DOWN;
+        this.body.velocity.setTo(0, this.speed.y);
+        this.sprite.play('down', this.animationSpeed);
     }
 
     idle(): void {
         super.idle();
 
-        switch (this.facing) {
-            case Facing.UP:
-                this.sprite.play('idle.up');
-                break;
-            case Facing.DOWN:
-                this.sprite.play('idle.down');
-                break;
-            case Facing.LEFT:
-                this.sprite.play('idle.left');
-                break;
-            case Facing.RIGHT:
-                this.sprite.play('idle.right');
-                break;
-        }
+        if (this.facing === Facing.UP)
+            this.sprite.play('idle back');
+        else if (this.facing === Facing.DOWN)
+            this.sprite.play('idle front');
+        else if (this.facing === Facing.LEFT)
+            this.sprite.play('idle left');
+        else if (this.facing === Facing.RIGHT)
+            this.sprite.play('idle right');
     }
 
     left(): void {
-        super.left();
-        this.sprite.play('left');
+        this.facing = Facing.LEFT;
+        this.body.velocity.setTo(this.speed.x * -1, 0);
+        this.sprite.play('left', this.animationSpeed);
     }
 
     right(): void {
-        super.right();
-        this.sprite.play('right');
+        this.facing = Facing.RIGHT;
+        this.body.velocity.setTo(this.speed.x, 0);
+        this.sprite.play('right', this.animationSpeed);
     }
 
     up(): void {
-        super.up();
-        this.sprite.play('up');
-    }
-
-    preload(): void {
-        super.preload();
-        this.game.load.spritesheet('torchic.walk', '/assets/pokemon/torchic/walk.png', 31, 32);
+        this.facing = Facing.UP;
+        this.body.velocity.setTo(0, this.speed.y * -1);
+        this.sprite.play('up', this.animationSpeed);
     }
 }

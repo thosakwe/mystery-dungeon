@@ -1,4 +1,5 @@
 import {AUTO, Game} from 'phaser-shim';
+import LevelTransitionState from "./states/level-transition";
 import LoadingState from './states/loading/index';
 import States from './states/names';
 import TitleState from './states/title/index';
@@ -14,12 +15,19 @@ export default class MyGame {
             AUTO,
             'game');
 
-        this.game.state.add(States.LOADING, LoadingState);
-        this.game.state.add(States.TITLE, TitleState);
+        this.registerState(LevelTransitionState);
+        this.registerState(LoadingState);
+        this.registerState(TitleState);
+        this.registerDungeons();
 
-        // Dungeons
-        this.game.state.add('Tiny Woods', TinyWoods);
+        this.game.state.start(States.LOADING);
+    }
 
-        this.game.state.start('Tiny Woods' || States.LOADING);
+    registerDungeons() {
+        this.registerState(TinyWoods);
+    }
+
+    registerState(state) {
+        this.game.state.add(state.prototype.stateName, state);
     }
 }

@@ -1,8 +1,9 @@
 import DungeonState from "./dungeon";
+import registerState from "../register-state";
+import {States} from "../index";
 
+@registerState(States.TINY_WOODS)
 export default class TinyWoods extends DungeonState {
-    private scrollSpeed = 24;
-
     constructor() {
         super();
         this.backgroundAsset = 'Tiny Woods.bg';
@@ -13,7 +14,7 @@ export default class TinyWoods extends DungeonState {
         super.preload();
     }
 
-    createBackground(): void {
-        super.createBackground();
+    createBackground(maxCols: number, maxRows: number): void {
+        super.createBackground(maxCols, maxRows);
     }
 }

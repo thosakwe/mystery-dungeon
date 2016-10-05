@@ -1,6 +1,9 @@
+import Assets from '../../assets';
+import registerState from "../register-state";
 import {ScaleManager, State, Text} from 'phaser-shim';
 import States from '../names';
 
+@registerState(States.LOADING)
 export default class Loading extends State {
     _interval: any;
     _percent = 0;
@@ -32,5 +35,13 @@ export default class Loading extends State {
                 this.game.state.start(States.TITLE);
             }
         }, 1);
+
+    }
+
+    preload(): void {
+        this.load.spritesheet(Assets.BEAN, '/assets/dungeons/beans.png', 13, 12);
+        this.load.image(Assets.INTRO, '/assets/title/intro.png');
+        this.game.load.spritesheet(Assets.PROTAGONIST, '/assets/trainer.png', 31, 32);
+        this.load.image(Assets.STAIRS, '/assets/dungeons/stairs.png');
     }
 }

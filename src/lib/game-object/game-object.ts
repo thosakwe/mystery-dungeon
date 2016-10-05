@@ -1,6 +1,8 @@
+import Assets from '../assets';
 import {Game, Physics, Sprite} from 'phaser-shim';
 
 abstract class GameObject {
+    assets = Assets;
     body:Physics.Arcade.Body;
     sprite:Sprite;
 

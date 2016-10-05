@@ -6,7 +6,12 @@ abstract class Character extends GameObject {
     animationSpeed = 15;
     facing = 0;
     jumpVelocity:number = 250;
-    speed: Point = new Point(99999);
+    speed: Point;
+
+    constructor(game) {
+        super(game);
+        this.speed = new Point(20, 20);
+    }
 
     create(): void {
         super.create();
@@ -20,7 +25,6 @@ abstract class Character extends GameObject {
     draw(x: number, y: number): Sprite {
         const sprite = super.draw(x, y);
         this.body.collideWorldBounds = true;
-        this.speed.setTo(sprite.width / 2);
         return sprite;
     }
 

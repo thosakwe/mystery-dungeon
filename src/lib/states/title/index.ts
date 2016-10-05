@@ -1,5 +1,9 @@
-import {Sprite, State} from 'phaser-shim';
+import registerState from "../register-state";
+import {KeyCode, Sprite, State} from 'phaser-shim';
+import PlayerState from "../../player-state";
+import States from '../names';
 
+@registerState(States.TITLE)
 export default class Title extends State {
     intro: Sprite;
 
@@ -16,9 +20,13 @@ export default class Title extends State {
 
         text.anchor.y = 0.5;
         text.setTextBounds(0, 0, this.world.width, text.height);
+
+        this.input.keyboard.addKey(KeyCode.ENTER).onDown.add(this.startGame, this);
+        this.input.onDown.add(this.startGame, this);
     }
 
-    preload(): void {
-        this.load.image('intro', '/assets/title/intro.png');
+    startGame() {
+        this.game.state.start(States.LEVEL_TRANSITION, true, false, 1, new PlayerState());
+        // this.game.state.start(States.TINY_WOODS);
     }
 }
