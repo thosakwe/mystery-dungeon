@@ -13,6 +13,10 @@ abstract class Character extends GameObject {
         this.speed = new Point(20, 20);
     }
 
+    attack(target:Character):void {
+
+    }
+
     create(): void {
         super.create();
     }
@@ -26,6 +30,10 @@ abstract class Character extends GameObject {
         const sprite = super.draw(x, y);
         this.body.collideWorldBounds = true;
         return sprite;
+    }
+
+    enemyInRange(enemy:Character):boolean {
+        return this.facing === -1;
     }
 
     idle(): void {

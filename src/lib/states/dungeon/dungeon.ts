@@ -281,9 +281,7 @@ abstract class DungeonState extends State {
     }
 
     spawnBean(pos:Point):Sprite {
-        const sprite = this.beans.create(pos.x, pos.y, this.assets.BEAN, this.rnd.between(0, 9));
-        sprite.scale.setTo(2);
-        return sprite;
+        return this.beans.create(pos.x, pos.y, this.assets.BEAN, this.rnd.between(0, 9));
     }
 
     spawnSomething():void {
